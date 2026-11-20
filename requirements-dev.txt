@@ -1,0 +1,3 @@
+-r requirements.txt
+pytest>=8
+moto[ec2,ssm,sts]>=5
