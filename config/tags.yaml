@@ -1,0 +1,31 @@
+# Tags applied to resources created by the bootstrap tools.
+#
+# `common` tags are applied to every resource. Tags under `resources.<type>`
+# are merged on top (resource-specific values win on key conflicts).
+#
+# Values may reference these placeholders, substituted at runtime:
+#   ${account_id}  ${region}  ${profile}  ${vpc_id}
+#
+# Each tool also adds a `bootstrap:tool` tag automatically so it can find
+# (and clean up) the resources it created. Do not remove it by hand.
+
+common:
+  ManagedBy: aws-account-bootstrap
+  Environment: bootstrap
+  # Owner: platform-team
+  # CostCenter: "1234"
+
+resources:
+  instance:
+    Name: fms-trigger-${vpc_id}
+    Purpose: Trigger Firewall Manager security group replication
+
+  volume:
+    Name: fms-trigger-root-${vpc_id}
+
+  network_interface:
+    Name: fms-trigger-eni-${vpc_id}
+
+  security_group:
+    Name: fms-trigger-deny-all
+    Purpose: Placeholder SG with no ingress or egress rules
